@@ -2,11 +2,12 @@ pipeline {
     agent any
     environment {
         JOB_HOME_DIR = "/home/jeevan/Desktop/JenkinsJob"
+        GIT_PAT = credentials('JEEVA_GIT_PAT')
     }
     stages {
         stage('Setup') {
             steps {
-                git branch: 'main', credentialsId: 'jeevan_git_hub_cred', poll: false, url: 'https://github.com/Jeevanandan819/jenkins-python-test.git'
+                git branch: 'main', credentialsId: 'jeevan_git_hub_cred', poll: false, url: 'https://${GIT_PAT}/Jeevanandan819/jenkins-python-test.git'
                 sh label: 'changing directory to test_repo', script: 'cd jenkins-python-test'
                 sh label: 'creating the virtual environment', script: 'python3 -m venv .venv'
                 sh label: 'Activating the venv', script: 'source .venv/bin/activate'
