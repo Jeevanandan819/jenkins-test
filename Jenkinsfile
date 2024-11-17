@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        JOB_HOME_DIR = "/home/jeevan/Desktop/JenkinsJob"
+        JOB_HOME_DIR = '/home/jeevan/Desktop/JenkinsJob'
     }
     stages {
         stage('Setup') {
