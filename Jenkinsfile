@@ -7,7 +7,7 @@ pipeline {
         stage('Setup') {
             steps {
                 git branch: 'main', credentialsId: 'jeevan_git_hub_cred', poll: false, url: 'https://github.com/Jeevanandan819/jenkins-python-test.git'
-                sh cd jenkins-python-test
+                sh label: 'changing directory to test_repo', script: 'cd jenkins-python-test'
                 sh label: 'creating the virtual environment', script: 'python3 -m venv .venv'
                 sh label: 'Activating the venv', script: 'source .venv/bin/activate'
                 sh label: 'Installing the python packages', script: 'pip install -r requirements.txt'
