@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                dir (${JOB_HOME_DIR}) {
+                dir ('${JOB_HOME_DIR}') {
                     git branch: 'main', credentialsId: 'jeevan_git_hub_cred', poll: false, url: 'https://github.com/Jeevanandan819/jenkins-python-test.git'
                     // sh label: 'changing directory to test_repo', script: 'cd jenkins-python-test'
                     dir ('${JOB_HOME_DIR}/jenkins-python-test') {                        
