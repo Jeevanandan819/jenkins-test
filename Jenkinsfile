@@ -1,14 +1,21 @@
 pipeline {
     agent any
+    environment {
+        JOB_HOME_DIR = "/home/jeevan/Desktop/JenkinsJob"
+    }
     stages {
-        stage('Build') {
+        stage('Setup') {
             steps {
-                echo 'Building..'
+                git branch: 'main', credentialsId: 'jeevan_git_hub_cred', poll: false, url: 'https://github.com/Jeevanandan819/jenkins-python-test.git'
+                sh cd jenkins-python-test
+                sh label: 'creating the virtual environment', script: 'python3 -m venv .venv'
+                sh label: 'Activating the venv', script: 'source .venv/bin/activate'
+                sh label: 'Installing the python packages', script: 'pip install -r requirements.txt'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh label: 'Invoking pytest', script: 'pytest'
             }
         }
         stage('Deploy') {
